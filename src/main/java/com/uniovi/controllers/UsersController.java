@@ -19,9 +19,13 @@ import com.uniovi.services.RolesService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.SignUpFormValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class UsersController {
+	
+	private Logger logger = LoggerFactory.getLogger(UsersController.class);
 
 	@Autowired
 	private UsersService usersService;
@@ -37,6 +41,7 @@ public class UsersController {
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
+		logger.info("Acceso al Home");
 		return "home";
 	}
 
@@ -58,6 +63,7 @@ public class UsersController {
 
 		usersService.addUser(user);
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
+		logger.info("Usuario se registra");
 		return "redirect:home";
 	}
 
@@ -66,6 +72,7 @@ public class UsersController {
 		if (error != null) {
 			model.addAttribute("error", true);
 		}
+		logger.info("Usuario se loggea");
 		return "login";
 	}
 
@@ -90,6 +97,7 @@ public class UsersController {
 		User activeUser = usersService.getUser(email);
 
 		model.addAttribute("activeUser", activeUser);
+		logger.info("Lista de usuarios");
 		return "user/list";
 	}
 
@@ -106,7 +114,7 @@ public class UsersController {
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("activeUser", activeUser);
 		model.addAttribute("page", users);
-
+		logger.info("Actualizar lista de usuarios");
 		return "user/list :: tableUsers";
 	}
 
@@ -119,7 +127,7 @@ public class UsersController {
 
 		model.addAttribute("requests", users.getContent());
 		model.addAttribute("page", users);
-
+		logger.info("Mostrando peticiones");
 		return "user/requests";
 	}
 
@@ -132,7 +140,7 @@ public class UsersController {
 
 		model.addAttribute("friends", users.getContent());
 		model.addAttribute("page", users);
-
+		logger.info("Mostrando amigos del usuario");
 		return "user/friends";
 	}
 
@@ -140,17 +148,18 @@ public class UsersController {
 	public String acceptRequest(Model model, @PathVariable Long id) {
 		User friend = usersService.getUserById(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+		
 		User activeUser = usersService.getUser(auth.getName());
 		activeUser.acceptRequestFrom(friend);
 
 		usersService.updateUser(activeUser);
-
+		logger.info("Enviando peticion a usuario: " + friend.getName());
 		return "redirect:/user/requests";
 	}
 	
 	@RequestMapping(value = { "/user/paginaAdmin" }, method = RequestMethod.GET)
 	public String adminPage(Model model) {
+		logger.warn("Mostrando pagina del administrador");
 		return "/user/paginaAdmin";
 	}
 }
