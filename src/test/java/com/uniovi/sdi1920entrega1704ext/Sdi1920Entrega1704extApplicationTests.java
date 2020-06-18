@@ -1,4 +1,4 @@
-package com.uniovi.sdi1920entrega1704710;
+package com.uniovi.sdi1920entrega1704ext;
 
 import static org.junit.Assert.assertTrue;
 
@@ -29,10 +29,10 @@ import com.uniovi.utils.SeleniumUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Sdi1920Entrega1704710ApplicationTests {
+public class Sdi1920Entrega1704extApplicationTests {
 
 	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver024 = "C:\\Users\\Jesus\\Documents\\PL-SDI-Sesion5-material\\geckodriver024win64.exe";
+	static String Geckdriver024 = "C:\\Users\\germa\\Desktop\\SDI\\Practica-5-Selenium\\OneDrive_2020-03-01\\PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8090";
@@ -473,6 +473,7 @@ public class Sdi1920Entrega1704710ApplicationTests {
 
 		// Cambiamos de idioma
 		driver.navigate().to("http://localhost:8090/?lang=EN");
+		SeleniumUtils.esperarSegundos(driver, 3);
 
 		SeleniumUtils.EsperaCargaPagina(driver, "text", "SOCIAL NETWORK", PO_View.getTimeout());
 
@@ -488,7 +489,8 @@ public class Sdi1920Entrega1704710ApplicationTests {
 
 		// Cambiamos de idioma
 		PO_NavView.changeIdiom(driver, "Spanish");
-
+		
+		SeleniumUtils.esperarSegundos(driver, 3);
 		// Comprobamos el texto lista usuarios en español
 		SeleniumUtils.textoPresentePagina(driver, "Usuarios");
 		SeleniumUtils.textoPresentePagina(driver, "Nombre");
@@ -500,16 +502,19 @@ public class Sdi1920Entrega1704710ApplicationTests {
 
 		// Cambiamos de idioma
 		PO_NavView.changeIdiom(driver, "English");
+		SeleniumUtils.esperarSegundos(driver, 3);
 		SeleniumUtils.textoPresentePagina(driver, "Friendship requests");
 		SeleniumUtils.textoPresentePagina(driver, "Email");
 
 		// Nos movemos a la lista de amigos
 		driver.navigate().to("http://localhost:8090/user/friends");
+		SeleniumUtils.esperarSegundos(driver, 3);
 		SeleniumUtils.textoPresentePagina(driver, "My friends");
 		SeleniumUtils.textoPresentePagina(driver, "Lastname");
 
 		// Cambiamos de idioma
 		PO_NavView.changeIdiom(driver, "Spanish");
+		SeleniumUtils.esperarSegundos(driver, 3);
 		SeleniumUtils.textoPresentePagina(driver, "Mis amigos");
 		SeleniumUtils.textoPresentePagina(driver, "Apellidos");
 	}
