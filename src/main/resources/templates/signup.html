@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+
+	<div class="container">
+		<h2 th:text="#{Signup.title}"></h2>
+		<form class="form-horizontal" method="post" action="/signup"
+			th:object="${user}">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email"><span
+					th:text="#{User.email}"></span></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="email"
+						placeholder="correo@email.com" /> <span class=text-danger
+						th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="name"><span
+					th:text="#{User.name}"></span></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="name"
+						placeholder="Juan" /> <span class=text-danger
+						th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="lastname"><span
+					th:text="#{User.lastname}"></span></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="lastname"
+						placeholder="Lopez Perez" /> <span class=text-danger
+						th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password"><span
+					th:text="#{User.password}"></span></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="password" /> <span
+						class=text-danger th:if="${#fields.hasErrors('password')}"
+						th:errors="*{password}"></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="passwordConfirm"><span
+					th:text="#{User.passwordConfirm}"></span></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="passwordConfirm" />
+					<span class=text-danger
+						th:if="${#fields.hasErrors('passwordConfirm')}"
+						th:errors="*{passwordConfirm}"></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">
+						<span th:text="#{Signup.send}"></span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

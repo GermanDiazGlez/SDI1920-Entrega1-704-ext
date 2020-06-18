@@ -1,0 +1,44 @@
+<table class="table table-hover" id="tableUsers">
+				<thead>
+					<tr>
+						<th th:text="#{User.email}"></th>
+						<th th:text="#{User.name}"></th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${usersList}">
+						<td th:text="${user.email}"></td>
+						<td th:text="${user.name}"></td>
+						<td>
+							<div th:if="${!user.equals(activeUser)}">
+								<div th:if="${!user.isFriend(activeUser)}">
+									<div th:if="${!user.hasRequest(activeUser)}">
+										<button type="button" th:id="${'addRequest' + user.id}"
+											class="btn btn-primary">
+											<span th:text="#{Button.addFriend}"></span>
+										</button>
+
+										<script th:inline="javascript">
+											/*<![CDATA[*/
+											$("#addRequest[[${user.id}]]").click(function() {
+													var pageParam = [[${param.page}]];
+													$("#tableUsers").load('/user/list/update/?id=[[${user.id}]]&page='+pageParam);
+												});
+											/*]]>*/
+										</script>
+									</div>
+
+									<div th:if="${user.hasRequest(activeUser)}">
+										<span th:text="#{Text.requestSent}"></span>
+									</div>
+								</div>
+
+								<div th:if="${user.isFriend(activeUser)}">
+									<span th:text="#{Text.areFriends}"></span>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
