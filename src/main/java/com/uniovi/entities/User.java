@@ -172,7 +172,8 @@ public class User {
 
 			// Friend es amigo de this
 			friend.getFriends().add(this);
-
+			
+			//Borramos la peticion
 			this.requests.remove(friend);
 		}
 	}
