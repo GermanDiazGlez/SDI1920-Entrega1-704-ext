@@ -23,6 +23,10 @@ public class UsersService {
 	public Page<User> getUsers(Pageable pageable) {
 		return usersRepository.findAll(pageable);
 	}
+	
+	public Page<User> getUsersByLocation(Pageable pageable) {
+		return usersRepository.findUsersByLocation(pageable);
+	}
 
 	public Page<User> searchUsersBySearchText(String searchText, Pageable pageable, String userEmail) {
 		return usersRepository.findUsersByNameLastNameAndEmail("%" + searchText + "%", userEmail, pageable);
@@ -65,5 +69,7 @@ public class UsersService {
 	public int getNumeroUsuarios() {
 		return numeroUsuarios;
 	}
+	
+	
 
 }

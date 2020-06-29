@@ -32,6 +32,9 @@ public class User {
 	private String passwordConfirm;
 
 	private String role;
+	
+	private String direccion;
+	private String comunidad;
 
 	// List of friends
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
@@ -47,11 +50,13 @@ public class User {
 		super();
 	}
 
-	public User(String name, String lastname, String email) {
+	public User(String name, String lastname, String email, String direccion, String comunidad) {
 		super();
 		this.name = name;
 		this.lastname = lastname;
 		this.email = email;
+		this.direccion = direccion;
+		this.comunidad = comunidad;
 	}
 
 	public Long getId() {
@@ -176,6 +181,22 @@ public class User {
 			//Borramos la peticion
 			this.requests.remove(friend);
 		}
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getComunidad() {
+		return comunidad;
+	}
+
+	public void setComunidad(String comunidad) {
+		this.comunidad = comunidad;
 	}
 
 }

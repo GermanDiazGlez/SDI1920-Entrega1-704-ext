@@ -61,6 +61,10 @@ public class SignUpFormValidator implements Validator {
 		if (!user.getPasswordConfirm().equals(user.getPassword())) {
 			errors.rejectValue("passwordConfirm", "Error.signup.passwordConfirm.coincidence");
 		}
+		
+		if(user.getDireccion().length() <= 5) {
+			errors.rejectValue("direccion", "Error.signup.direccion");
+		}
 
 	}
 

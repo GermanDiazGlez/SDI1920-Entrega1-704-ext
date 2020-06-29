@@ -3,13 +3,18 @@
 					<tr>
 						<th th:text="#{User.email}"></th>
 						<th th:text="#{User.name}"></th>
+						<thDireccion></th>
+						<th>Localidad</th>
 						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="user : ${usersList}">
+				<tr th:each="comunidad : ${comunidades}">
+					<tr th:each="user : ${usersList}">	
+						<td th:text="${user.comunidad}"></td>
 						<td th:text="${user.email}"></td>
 						<td th:text="${user.name}"></td>
+						<td th:text="${user.direccion}"></td>
 						<td>
 							<div th:if="${!user.equals(activeUser)}">
 								<div th:if="${!user.isFriend(activeUser)}">
@@ -39,6 +44,7 @@
 								</div>
 							</div>
 						</td>
+					</tr>
 					</tr>
 				</tbody>
 			</table>

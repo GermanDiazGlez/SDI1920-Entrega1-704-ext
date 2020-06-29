@@ -19,6 +19,9 @@ import com.uniovi.services.RolesService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.SignUpFormValidator;
+
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +63,8 @@ public class UsersController {
 		}
 
 		user.setRole(rolesService.getRoles()[1]);
+		
+		
 
 		usersService.addUser(user);
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
@@ -86,7 +91,7 @@ public class UsersController {
 		if (searchText != null && !searchText.isEmpty()) {
 			users = usersService.searchUsersBySearchText(searchText, pageable, userEmail);
 		} else {
-			users = usersService.getOtherNonAdminUsers(userEmail, pageable);
+			users = usersService.getUsersByLocation(pageable);
 		}
 
 		model.addAttribute("usersList", users.getContent());
@@ -162,4 +167,6 @@ public class UsersController {
 		logger.warn("Mostrando pagina del administrador");
 		return "/user/paginaAdmin";
 	}
+	
+	
 }

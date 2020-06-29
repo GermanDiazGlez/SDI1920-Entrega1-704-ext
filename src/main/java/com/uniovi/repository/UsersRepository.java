@@ -26,5 +26,11 @@ public interface UsersRepository extends CrudRepository<User, Long> {
 
 	@Query("SELECT f FROM User u JOIN u.friends f where u.id= ?1")
 	Page<User> findFriendsByUser(Long id, Pageable pageable);
+	
+	@Query("SELECT u FROM User u WHERE (u.role != 'ROLE_ADMIN') ORDER BY u.comunidad ASC")
+	Page<User> findUsersByLocation(Pageable pageable);
+	
+//	@Query("SELECT u.comunidad FROM User u WHERE (u.role != 'ROLE_ADMIN' AND u.email != ?1) ORDER BY u.comunidad ASC")
+//	List<User> findLocation(String comunidad);
 
 }
